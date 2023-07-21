@@ -1,35 +1,33 @@
 import React from "react";
-import { Box, Paper, Typography, CssBaseline, ThemeProvider } from "@mui/material";
-import { createTheme } from "@mui/material/styles";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { routes as appRoutes } from "./routes";
-import NavBar from "./components/NavBar";
-import SearchBar from "./components/SearchBar";
-import Loading from "./components/Loading";
-import searchImage from "./api";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-export default function App(){
+import { Box, CssBaseline, ThemeProvider } from "@mui/material";
+import { createTheme } from "@mui/material/styles";
+
+import { routes as appRoutes } from "./routes";
+import ResponsiveAppBar from "./components/AppBar";
+
+export default function App() {
   const theme = createTheme({
-    palette:{
-      primary:{
+    palette: {
+      primary: {
         light: "#63b8ff",
         main: "#0989e3",
         dark: "#005db0",
-        contrastText: "#000",
+        contrastText: "#000"
       },
-      secondary:{
+      secondary: {
         main: "#4db6ac",
         light: "#82e9de",
         dark: "#00867d",
-        contrastText: "#000",
-      },
-    },
+        contrastText: "#000"
+      }
+    }
   });
-  //searchImage();
-  return(
+
+  return (
     <ThemeProvider theme={theme}>
-      <CssBaseline/>
-      <SearchBar/>
+      <CssBaseline />
       <Box
         height="100vh"
         display="flex"
@@ -38,19 +36,14 @@ export default function App(){
         flexDirection="column"
       >
         <Router>
-        <NavBar/>
+          <ResponsiveAppBar />
           <Routes>
             {appRoutes.map((route) => (
-              <Route
-                key={route.key}
-                path={route.path}
-                element={<route.component />}
-              />
+              <Route key={route.key} path={route.path} element={<route.component />} />
             ))}
           </Routes>
         </Router>
       </Box>
-      {/* <Loading/> */}
     </ThemeProvider>
   );
 }
