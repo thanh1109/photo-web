@@ -1,8 +1,12 @@
-import React, { FC, ReactElement } from "react";
+import React, { FC, ReactElement, useEffect } from "react";
+import { getUser, getCollection } from "../api";
 
 import { Box, Typography } from "@mui/material";
 
 const Home: FC = (): ReactElement => {
+  useEffect(() => {
+    getCollection().then((res) => console.log(res));
+  })
   return (
     <Box
       sx={{

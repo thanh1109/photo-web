@@ -1,6 +1,5 @@
 import { FC } from "react";
-
-import About from "./pages/About";
+import Football from "./pages/Football";
 import Home from "./pages/Home";
 import Product from "./pages/Product";
 
@@ -22,10 +21,10 @@ export const routes: Route[] = [
   },
   {
     key: "about-route",
-    title: "Sports",
-    path: "/about",
+    title: "Football",
+    path: "/football",
     enabled: true,
-    component: About
+    component: Football
   },
   {
     key: "product-route",

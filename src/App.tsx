@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import { Box, CssBaseline, ThemeProvider } from "@mui/material";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 
 import { routes as appRoutes } from "./routes";
@@ -28,22 +28,14 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box
-        height="100vh"
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        flexDirection="column"
-      >
-        <Router>
-          <ResponsiveAppBar />
-          <Routes>
-            {appRoutes.map((route) => (
-              <Route key={route.key} path={route.path} element={<route.component />} />
-            ))}
-          </Routes>
-        </Router>
-      </Box>
+      <Router>
+        <ResponsiveAppBar />
+        <Routes>
+          {appRoutes.map((route) => (
+            <Route key={route.key} path={route.path} element={<route.component />} />
+          ))}
+        </Routes>
+      </Router>
     </ThemeProvider>
   );
 }

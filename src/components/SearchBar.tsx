@@ -3,6 +3,8 @@ import React, { FC, ReactElement, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import { alpha, styled } from "@mui/material/styles";
+import { IconButton } from "@mui/material";
+import { searchPhotos } from "../api";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -19,15 +21,15 @@ const Search = styled("div")(({ theme }) => ({
   }
 }));
 
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center"
-}));
+// const SearchIconWrapper = styled("div")(({ theme }) => ({
+//   padding: theme.spacing(0, 2),
+//   height: "100%",
+//   position: "absolute",
+//   pointerEvents: "none",
+//   display: "flex",
+//   alignItems: "center",
+//   justifyContent: "center"
+// }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
@@ -51,17 +53,22 @@ const SearchBar: FC = (): ReactElement => {
     setInput(event.target.value);
   };
 
+  const handleSearch = () => {
+    searchPhotos(input).then((res) => {
+      console.log(res.data.results);
+    })
+  }
   return (
     <Search>
-      <SearchIconWrapper>
-        <SearchIcon />
-      </SearchIconWrapper>
       <StyledInputBase
         value={input}
         onChange={handleChange}
-        placeholder="Search…"
+        placeholder="Search photos"
         inputProps={{ "aria-label": "search" }}
       />
+      <IconButton onClick={handleSearch}>
+          <SearchIcon />
+      </IconButton>
     </Search>
   );
 };
