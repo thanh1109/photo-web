@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import InstagramIcon from "@mui/icons-material/Instagram";
 import ZoomInIcon from "@mui/icons-material/ZoomIn";
 import Avatar from "@mui/material/Avatar";

@@ -2,19 +2,19 @@ import { FC, ReactElement, useEffect, useState } from "react";
 
 import { Box, Card, CardActions, CardMedia, Grid, IconButton } from "@mui/material";
 import { getTopics, getTopicPhotos, likePhoto, downloadPhotos } from "../api";
-import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import DownloadOutlinedIcon from '@mui/icons-material/DownloadOutlined';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ImageModal from "../components/ImageModal";
 
 const Product: FC = (): ReactElement => {
   const [images, setImages] = useState<[]>([]);
+  // useEffect(() => {
+  //   getTopics().then((res) => {
+  //     console.log(res);
+  //   })
+  // }, [])
   useEffect(() => {
-    getTopics().then((res) => {
-      console.log(res);
-    })
-  }, [])
-  useEffect(() => {
-    getTopicPhotos("nature").then((res) => {  
+    getTopicPhotos("animals").then((res) => {  
       setImages(res.data);
     })
   },[images]);
