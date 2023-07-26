@@ -32,7 +32,7 @@ const ImageModal = (props: any) => {
       </IconButton>
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
-          <img src={image.urls.small} style={{ width: "100%" }} />
+          <img src={image.urls.small} style={{ width: "100%" }} alt={image.description}/>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             {image.description || ""}
           </Typography>
@@ -42,7 +42,7 @@ const ImageModal = (props: any) => {
               <Typography sx={{ fontWeight: 600 }}>{image.user.name}</Typography>
               <Box sx={{ display: "flex", alignItems: "center", gap: "4px" }}>
                 <InstagramIcon color="secondary" />
-                <Link href={image.user.portfolio_url}>{image.user.instagram_username}</Link>
+                <Link href={image.user.portfolio_url}>{image.user.username}</Link>
               </Box>
             </Box>
           </Box>

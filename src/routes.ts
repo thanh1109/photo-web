@@ -1,10 +1,12 @@
 import { FC } from "react";
-import Football from "./pages/Football";
 import Home from "./pages/Home";
-import Product from "./pages/Product";
 import Animals from "./pages/Animals";
 import Film from "./pages/Film";
+import People from "./pages/People";
+import Athletics from "./pages/Athletics";
 import SearchPage from "./pages/SearchPage";
+import Nature from "./pages/Nature";
+import Blue from "./pages/Blue";
 interface Route {
   key: string;
   title: string;
@@ -33,14 +35,14 @@ export const routes: Route[] = [
     title: "Blue",
     path: "/blue",
     enabled: true,
-    component: Football
+    component: Blue
   },
   {
     key: "nature-route",
     title: "Nature",
     path: "/nature",
     enabled: true,
-    component: Product
+    component: Nature
   },
   {
     key: "animals-route",
@@ -55,5 +57,19 @@ export const routes: Route[] = [
     path: "/film",
     enabled: true,
     component: Film
+  },
+  {
+    key: "people-route",
+    title: "People",
+    path: "/people",
+    enabled: true,
+    component: People
+  },
+  {
+    key: "athletics-route",
+    title: "Athletics",
+    path: "/athletics",
+    enabled: true,
+    component: Athletics
   },
 ];

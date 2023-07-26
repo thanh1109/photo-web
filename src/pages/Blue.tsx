@@ -1,19 +1,19 @@
 import { FC, ReactElement, useEffect, useState } from "react";
 import { Box, Card, CardActions, CardMedia, Grid, IconButton } from "@mui/material";
-import { getTopicPhotos, downloadPhotos} from "../api";
+import { getTopicPhotos, downloadPhotos } from "../api";
 import DownloadOutlinedIcon from '@mui/icons-material/DownloadOutlined';
 import ImageModal from "../components/ImageModal";
-import saveAs from "file-saver";
 import Loading from "../components/Loading";
 
-const Film: FC = (): ReactElement => {
+const Blue: FC = (): ReactElement => {
   const [images, setImages] = useState<[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [hasMore, setHasMore] = useState(true);
   var pageNumber = 0;
+  
   const loadMoreImage = () => {
       pageNumber += 1;
-      getTopicPhotos("film", pageNumber)
+      getTopicPhotos("blue", pageNumber)
       .then((res) => {
         if(res.data.length === 0) {
           setHasMore(false);
@@ -28,7 +28,7 @@ const Film: FC = (): ReactElement => {
       })
       .finally(() => {
         setIsLoading(false);
-      });
+      })
   }
 
   const handleScroll = (e:any) => {
@@ -44,11 +44,11 @@ const Film: FC = (): ReactElement => {
     }
   }, []);
   const renderImage = (item: any) => {
+    
     const handleDownload = () => {
       downloadPhotos(item.id).then((res) => {
         if(res.status === 200) {
-          saveAs(res.data.url, item.description);
-          //console.log(res);
+          alert("Downloaded");
         } else {
           alert("Can't download photo");
         }
@@ -56,20 +56,23 @@ const Film: FC = (): ReactElement => {
     }
     return (
       <Grid key={item.id} item xs={12} sm={6} md={4} lg={3}>
-        {isLoading?(<Loading/>):(<Card>
-          <CardMedia
-            component="img"
-            alt={item.description || "image"}
-            height="200"
-            image={item.urls.small}
-          />
-          <CardActions sx={{ display: "flex", justifyContent: "flex-end", gap: 0 }}>
-            <IconButton onClick={handleDownload} title="Download">
-              <DownloadOutlinedIcon/>
-            </IconButton>
-            <ImageModal image={item} />
-          </CardActions>
-        </Card>)}
+        {
+          isLoading?(<Loading/>):(<Card>
+            <CardMedia
+              component="img"
+              alt={item.description || "image"}
+              height="200"
+              image={item.urls.small}
+            />
+            <CardActions sx={{ display: "flex", justifyContent: "flex-end", gap: 0 }}>
+              <IconButton onClick={handleDownload} title="Download">
+                <DownloadOutlinedIcon/>
+              </IconButton>
+              <ImageModal image={item} />
+            </CardActions>
+          </Card>)
+        }
+        
       </Grid>
     );
   };
@@ -81,4 +84,5 @@ const Film: FC = (): ReactElement => {
     </Box>
   );
 };
-export default Film;
+
+export default Blue;

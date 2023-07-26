@@ -28,7 +28,7 @@ export const getUserProfile = async (username: any) => {
     params: {
       username: username
     }
-  })
+  });
   return res;
 }
 export const getUserPorfolio = async (username: any) => {
@@ -39,7 +39,7 @@ export const getUserPorfolio = async (username: any) => {
     params: {
       username: username
     }
-  })
+  });
   return res;
 }
 export const getUserPhotos = async (username: any) => {
@@ -50,7 +50,7 @@ export const getUserPhotos = async (username: any) => {
     params: {
       username: username
     }
-  })
+  });
   return res;
 }
 export const getUserLikedPhotos = async (username: any) => {
@@ -61,7 +61,7 @@ export const getUserLikedPhotos = async (username: any) => {
     params: {
       username: username
     }
-  })
+  });
   return res;
 }
 
@@ -73,7 +73,7 @@ export const getUserCollections = async (username:any) => {
       params:{
         username: username
       }
-  })
+  });
   return res;
 }
 
@@ -85,20 +85,19 @@ export const getUserStatistics = async (username:any) => {
       params: {
         username: username
       }
-  })
+  });
   return res;
 }
-export const getImage = async() => {
+export const getImage = async(page:number) => {
     const res = await axios.get(URL + "photos", {
         headers: {
             Authorization: access_key
         }, 
         params: {
-            page: 2,
+            page: page,
             per_page: 20
         } 
-    })
-    //console.log(res);
+    });
     return res;
 }
 export const getPhotoWithID = async(id:any) => {
@@ -109,7 +108,7 @@ export const getPhotoWithID = async(id:any) => {
         params:{
             id: id
         }       
-    })
+    });
     return res;
 }
 export const getRandomPhoto = async() => {
@@ -117,7 +116,7 @@ export const getRandomPhoto = async() => {
         headers:{
             Authorization: access_key
         }, 
-    })
+    });
     return res;
 }
 export const getPhotoStatistics = async(id:any) => {
@@ -128,7 +127,7 @@ export const getPhotoStatistics = async(id:any) => {
       params:{
           id: id
       }       
-  })
+  });
   return res;
 }
 
@@ -140,7 +139,7 @@ export const likePhoto = async (id:any) => {
       params: {
         id: id
       }
-   })
+   });
    return res;
 }
 export const getCollection = async () => {
@@ -148,7 +147,7 @@ export const getCollection = async () => {
       headers: {
         Authorization: access_key
       },
-  })
+  });
   return res;
 }
 export const getPhotoOfCollection = async (id:any) => {
@@ -159,7 +158,7 @@ export const getPhotoOfCollection = async (id:any) => {
       params: {
         id: id
       }
-  })
+  });
   return res;
 }
 export const createCollection = async (title:any) => {
@@ -170,7 +169,7 @@ export const createCollection = async (title:any) => {
       params: {
         title: title
       }
-  })
+  });
   return res;
 }
 export const searchPhotos =async (query: any) => {
@@ -182,7 +181,7 @@ export const searchPhotos =async (query: any) => {
       query: query,
       per_page: 20
     }
-  })
+  });
   return res;
 }
 export const searchUsers =async (query: any) => {
@@ -193,7 +192,7 @@ export const searchUsers =async (query: any) => {
     params: {
       query: query
     }
-  })
+  });
   return res;
 }
 export const downloadPhotos =async (id: any) => {
@@ -205,38 +204,48 @@ export const downloadPhotos =async (id: any) => {
     params: {
       id: id
     }
-  })
+  });
   return res;
 }
 
-// export const updateCollection = async () => {
-//   const res = await axios.put(URL + "collections/" + id, {
-//       headers: {
-//         Authorization: access_key
-//       },
-//       // params: {
-//       //   title: title
-//       // }
-//   })
-//   return res;
-// }
 export const getTopics = async() => {
   const res = await axios.get(URL + "topics", {
     headers: {
       Authorization: access_key
     },
-  })
+  });
   return res;
 }
-export const getTopicPhotos = async(id_or_slug:any) => {
+export const getTopic = async (id_or_slug:any) => {
+  const res = await axios.get(URL + "topics/" + id_or_slug, {
+    headers: {
+      Authorization: access_key
+    }, 
+    params: {
+      id_or_slug: id_or_slug
+    }
+  });
+  return res;
+}
+export const getTopicPhotos = async(id_or_slug:any, page:number) => {
   const res = await axios.get(URL + "topics/" + id_or_slug + "/photos", {
     headers: {
       Authorization: access_key
     }, 
     params: {
       id_or_slug: id_or_slug,
+      page: page,
       per_page: 20
     }
-  })
+  });
+  return res;
+}
+
+export const getTotalStats = async () => {
+  const res = await axios.get(URL + "stats/total", {
+    headers: {
+      Authorization: access_key
+    }
+  });
   return res;
 }
