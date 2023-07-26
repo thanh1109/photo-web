@@ -32,7 +32,7 @@ const ImageModal = (props: any) => {
       </IconButton>
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
-          <img src={image.urls.raw} style={{ width: "100%" }} />
+          <img src={image.urls.small} style={{ width: "100%" }} />
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             {image.description || ""}
           </Typography>

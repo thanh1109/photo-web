@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Product from "./pages/Product";
 import Animals from "./pages/Animals";
 import Film from "./pages/Film";
+import SearchPage from "./pages/SearchPage";
 interface Route {
   key: string;
   title: string;
@@ -19,6 +20,13 @@ export const routes: Route[] = [
     path: "/",
     enabled: true,
     component: Home
+  },
+  {
+    key: "search-route",
+    title: "Search photos",
+    path: "/search",
+    enabled: true,
+    component: SearchPage
   },
   {
     key: "blue-route",
@@ -47,5 +55,5 @@ export const routes: Route[] = [
     path: "/film",
     enabled: true,
     component: Film
-  }
+  },
 ];

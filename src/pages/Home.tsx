@@ -1,4 +1,5 @@
-import React, { FC, ReactElement, useState, useEffect } from "react";
+import { FC, ReactElement, useState, useEffect } from "react";
+import {saveAs} from "file-saver";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import Box from "@mui/material/Box";
@@ -23,11 +24,12 @@ const Home: FC = (): ReactElement => {
     const handleDownload = () => {
       downloadPhotos(item.id).then((res) => {
         if(res.status == 200) {
-          alert("Downloaded");
+          saveAs(res.data.url, item.description);
+          //console.log(res);
         } else {
-          alert("Can't download photo");
+          alert("Can't download photo")
         }
-      }) 
+      })
     }
     return (
       <Grid key={item.id} item xs={12} sm={6} md={4} lg={3}>
@@ -36,7 +38,7 @@ const Home: FC = (): ReactElement => {
             component="img"
             alt={item.description || "image"}
             height="200"
-            image={item.urls.raw}
+            image={item.urls.small}
           />
           <CardActions sx={{ display: "flex", justifyContent: "flex-end", gap: 0 }}>
             <IconButton onClick={handleDownload}>

@@ -2,6 +2,8 @@ import axios from "axios";
 
 const URL = "https://api.unsplash.com/";
 const access_key = "Client-ID BvI35QR5b5IPVBWU_ESBW4Sj6biWuAWEMGzp5bf_NMU";
+const client_id = "BvI35QR5b5IPVBWU_ESBW4Sj6biWuAWEMGzp5bf_NMU";
+
 export const getUser = async () => {
   const res = await axios.get(URL + "me", {
     headers: {
@@ -177,7 +179,8 @@ export const searchPhotos =async (query: any) => {
       Authorization: access_key
     },
     params: {
-      query: query
+      query: query,
+      per_page: 20
     }
   })
   return res;
@@ -194,7 +197,8 @@ export const searchUsers =async (query: any) => {
   return res;
 }
 export const downloadPhotos =async (id: any) => {
-  const res = await axios.get(URL + "photos/" + id + "/download", {
+  const ixid = "M3w0NzgwMTd8MHwxfHNlYXJjaHwxfHxjYXR8ZW58MHx8fHwxNjkwMzQxMTY3fDA"
+  const res = await axios.get(URL + "photos/" + id + "/download?ixid=" + ixid + "&client_id=" + client_id, {
     headers: {
       Authorization: access_key
     },

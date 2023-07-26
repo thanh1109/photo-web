@@ -8,6 +8,8 @@ import ImageModal from "../components/ImageModal";
 
 const Football: FC = (): ReactElement => {
   const [images, setImages] = useState<[]>([]);
+  const [login, setLogin] = useState(false);
+
   useEffect(() => {
     getTopicPhotos("blue").then((res) => {  
       setImages(res.data);
@@ -33,15 +35,17 @@ const Football: FC = (): ReactElement => {
             component="img"
             alt={item.description || "image"}
             height="200"
-            image={item.urls.raw}
+            image={item.urls.small}
           />
           <CardActions sx={{ display: "flex", justifyContent: "flex-end", gap: 0 }}>
             <IconButton onClick={handleDownload}>
               <DownloadOutlinedIcon/>
             </IconButton>
-            <IconButton onClick={handleLike}>
-              <FavoriteBorderIcon />
-            </IconButton>
+            {
+              login ? (<IconButton onClick={handleLike}>
+                        <FavoriteBorderIcon />
+                       </IconButton>) : (<></>)
+            }
             <ImageModal image={item} />
           </CardActions>
         </Card>

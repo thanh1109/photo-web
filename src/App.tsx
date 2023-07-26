@@ -6,6 +6,7 @@ import { createTheme } from "@mui/material/styles";
 
 import { routes as appRoutes } from "./routes";
 import ResponsiveAppBar from "./components/AppBar";
+import Footer from "./components/Footer";
 
 export default function App() {
   const theme = createTheme({
@@ -36,6 +37,7 @@ export default function App() {
           ))}
         </Routes>
       </Router>
+      {/* <Footer/> */}
     </ThemeProvider>
   );
 }

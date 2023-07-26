@@ -4,9 +4,11 @@ import { getTopics, getTopicPhotos, likePhoto, downloadPhotos } from "../api";
 import DownloadOutlinedIcon from '@mui/icons-material/DownloadOutlined';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ImageModal from "../components/ImageModal";
+import saveAs from "file-saver";
 
 const Film: FC = (): ReactElement => {
   const [images, setImages] = useState<[]>([]);
+  const [login, setLogin] = useState(false);
   // useEffect(() => {
   //   getTopics().then((res) => {
   //     console.log(res);
@@ -24,7 +26,8 @@ const Film: FC = (): ReactElement => {
     const handleDownload = () => {
       downloadPhotos(item.id).then((res) => {
         if(res.status == 200) {
-          alert("Downloaded");
+          saveAs(res.data.url, item.description);
+          //console.log(res);
         } else {
           alert("Can't download photo")
         }
@@ -37,15 +40,17 @@ const Film: FC = (): ReactElement => {
             component="img"
             alt={item.description || "image"}
             height="200"
-            image={item.urls.raw}
+            image={item.urls.small}
           />
           <CardActions sx={{ display: "flex", justifyContent: "flex-end", gap: 0 }}>
             <IconButton onClick={handleDownload}>
               <DownloadOutlinedIcon/>
             </IconButton>
-            <IconButton onClick={handleLike}>
-              <FavoriteBorderIcon />
-            </IconButton>
+            {
+              login ? (<IconButton onClick={handleLike}>
+                        <FavoriteBorderIcon />
+                       </IconButton>) : (<></>)
+            }
             <ImageModal image={item} />
           </CardActions>
         </Card>

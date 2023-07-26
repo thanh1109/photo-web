@@ -51,7 +51,7 @@ const ResponsiveAppBar: FC = (): ReactElement => {
             ))}
           </Box>
 
-          <SearchBar />
+          {/* <SearchBar /> */}
         </Toolbar>
       </Container>
     </AppBar>
