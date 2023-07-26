@@ -1,14 +1,13 @@
 import { FC, ReactElement, useEffect, useState } from "react";
-
 import { Box, Card, CardActions, CardMedia, Grid, IconButton } from "@mui/material";
-import { getTopics, getTopicPhotos, likePhoto, downloadPhotos } from "../api";
+import { getTopicPhotos, likePhoto, downloadPhotos } from "../api";
 import DownloadOutlinedIcon from '@mui/icons-material/DownloadOutlined';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ImageModal from "../components/ImageModal";
 
 const Football: FC = (): ReactElement => {
   const [images, setImages] = useState<[]>([]);
-  const [login, setLogin] = useState(false);
+  const login = false;
 
   useEffect(() => {
     getTopicPhotos("blue").then((res) => {  
@@ -21,7 +20,7 @@ const Football: FC = (): ReactElement => {
     }
     const handleDownload = () => {
       downloadPhotos(item.id).then((res) => {
-        if(res.status == 200) {
+        if(res.status === 200) {
           alert("Downloaded");
         } else {
           alert("Can't download photo")
@@ -38,7 +37,7 @@ const Football: FC = (): ReactElement => {
             image={item.urls.small}
           />
           <CardActions sx={{ display: "flex", justifyContent: "flex-end", gap: 0 }}>
-            <IconButton onClick={handleDownload}>
+            <IconButton onClick={handleDownload} title="Download">
               <DownloadOutlinedIcon/>
             </IconButton>
             {

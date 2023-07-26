@@ -1,6 +1,6 @@
 import { FC, ReactElement, useEffect, useState } from "react";
 import { Box, Card, CardActions, CardMedia, Grid, IconButton } from "@mui/material";
-import { getTopics, getTopicPhotos, likePhoto, downloadPhotos } from "../api";
+import { getTopicPhotos, likePhoto, downloadPhotos } from "../api";
 import DownloadOutlinedIcon from '@mui/icons-material/DownloadOutlined';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ImageModal from "../components/ImageModal";
@@ -8,12 +8,7 @@ import saveAs from "file-saver";
 
 const Film: FC = (): ReactElement => {
   const [images, setImages] = useState<[]>([]);
-  const [login, setLogin] = useState(false);
-  // useEffect(() => {
-  //   getTopics().then((res) => {
-  //     console.log(res);
-  //   })
-  // }, [])
+  const login = false;
   useEffect(() => {
     getTopicPhotos("film").then((res) => {  
       setImages(res.data);
@@ -25,7 +20,7 @@ const Film: FC = (): ReactElement => {
     }
     const handleDownload = () => {
       downloadPhotos(item.id).then((res) => {
-        if(res.status == 200) {
+        if(res.status === 200) {
           saveAs(res.data.url, item.description);
           //console.log(res);
         } else {
@@ -43,7 +38,7 @@ const Film: FC = (): ReactElement => {
             image={item.urls.small}
           />
           <CardActions sx={{ display: "flex", justifyContent: "flex-end", gap: 0 }}>
-            <IconButton onClick={handleDownload}>
+            <IconButton onClick={handleDownload} title="Download">
               <DownloadOutlinedIcon/>
             </IconButton>
             {

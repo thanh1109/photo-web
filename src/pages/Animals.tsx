@@ -9,12 +9,8 @@ import Loading from "../components/Loading";
 
 const Product: FC = (): ReactElement => {
   const [images, setImages] = useState<[]>([]);
-  const [login, setLogin] = useState(false);
-  // useEffect(() => {
-  //   getTopics().then((res) => {
-  //     console.log(res);
-  //   })
-  // }, [])
+  const login = false;
+
   useEffect(() => {
     getTopicPhotos("animals").then((res) => {  
       setImages(res.data);
@@ -26,7 +22,7 @@ const Product: FC = (): ReactElement => {
     }
     const handleDownload = () => {
       downloadPhotos(item.id).then((res) => {
-        if(res.status == 200) {
+        if(res.status === 200) {
           saveAs(res.data.url, item.description);
           //console.log(res);
         } else {
@@ -44,7 +40,7 @@ const Product: FC = (): ReactElement => {
             image={item.urls.small}
           />
           <CardActions sx={{ display: "flex", justifyContent: "flex-end", gap: 0 }}>
-            <IconButton onClick={handleDownload}>
+            <IconButton onClick={handleDownload} title="Download">
               <DownloadOutlinedIcon/>
             </IconButton>
             {

@@ -13,7 +13,7 @@ import { getImage, likePhoto, downloadPhotos } from "../api";
 
 const Home: FC = (): ReactElement => {
   const [images, setImages] = useState<[]>([]);
-  const [login, setLogin] = useState(false);
+  const login = false;
   useEffect(() => {
     getImage().then((res) => setImages(res.data));
   }, [images]);
@@ -23,7 +23,7 @@ const Home: FC = (): ReactElement => {
     }
     const handleDownload = () => {
       downloadPhotos(item.id).then((res) => {
-        if(res.status == 200) {
+        if(res.status === 200) {
           saveAs(res.data.url, item.description);
           //console.log(res);
         } else {
@@ -41,7 +41,7 @@ const Home: FC = (): ReactElement => {
             image={item.urls.small}
           />
           <CardActions sx={{ display: "flex", justifyContent: "flex-end", gap: 0 }}>
-            <IconButton onClick={handleDownload}>
+            <IconButton onClick={handleDownload} title="Download">
               <DownloadOutlinedIcon/>
             </IconButton>
             {

@@ -1,7 +1,7 @@
 import React, { FC, ReactElement, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
-import InputBase from "@mui/material/InputBase";
-import { alpha, styled } from "@mui/material/styles";
+// import InputBase from "@mui/material/InputBase";
+// import { alpha, styled } from "@mui/material/styles";
 import { IconButton, Grid, Card, CardMedia, CardActions, Box, TextField, Button } from "@mui/material";
 import { downloadPhotos, likePhoto, searchPhotos } from "../api";
 import ImageModal from "../components/ImageModal";
@@ -41,7 +41,7 @@ import saveAs from "file-saver";
 // }));
 const SearchPage: FC = (): ReactElement => {
   const [input, setInput] = useState("");
-  const [login, setLogin] = useState(false);
+  const login = false;
   const [imagesList, setImagesList] = useState<[]>([]);
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInput(event.target.value);
@@ -59,7 +59,7 @@ const SearchPage: FC = (): ReactElement => {
   }
 
   const handleKeyDown = (e:any) => {
-    if(e.key == "Enter") {
+    if(e.key === "Enter") {
       handleSearch();
     }
   }
@@ -69,7 +69,7 @@ const SearchPage: FC = (): ReactElement => {
     }
     const handleDownload = () => {
       downloadPhotos(item.id).then((res) => {
-        if(res.status == 200) {
+        if(res.status === 200) {
           saveAs(res.data.url, item.description);
           //console.log(res);
         } else {
@@ -87,7 +87,7 @@ const SearchPage: FC = (): ReactElement => {
             image={item.urls.small}
           />
           <CardActions sx={{ display: "flex", justifyContent: "flex-end", gap: 0 }}>
-            <IconButton onClick={handleDownload}>
+            <IconButton onClick={handleDownload} title="Download">
               <DownloadOutlinedIcon/>
             </IconButton>
             {
@@ -143,6 +143,7 @@ const SearchPage: FC = (): ReactElement => {
         }}
         disabled={!input}
         onClick={handleSearch}
+        title="Search"
       >
         <SearchIcon/>
       </Button>
